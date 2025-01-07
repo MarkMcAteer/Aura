@@ -40,5 +40,11 @@ void AAuraEnemy::BeginPlay()
 	
 	// If check fails ASC is null. 
 	check(AbilitySystemComponent);
+	InitAbilityActorInfo();
+}
+
+void AAuraEnemy::InitAbilityActorInfo()
+{
 	AbilitySystemComponent->InitAbilityActorInfo(this, this);
+	Cast<UAuraAbilitySystemComponent>(AbilitySystemComponent)->AbilityActorInfoSet();
 }
