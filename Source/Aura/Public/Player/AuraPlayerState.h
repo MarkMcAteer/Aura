@@ -26,7 +26,7 @@ public:
 
 protected:
 	// Pointers to store ASC and AS
-	UPROPERTY()
+	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
 
 	UPROPERTY()
