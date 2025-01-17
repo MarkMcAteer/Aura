@@ -68,4 +68,34 @@ FString("Ignores Percentage of enemy Armor, increase Critical Hit Chance"));
 	* End Secondary Gameplay Attribute Tags
 	*/
 	
+	/*
+	* Input Tags
+	*/
+
+	GameplayTags.InputTag_LMB = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("InputTag.LMB"),
+FString("Input tag for left mouse button"));
+
+	
+	GameplayTags.InputTag_RMB = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("InputTag.RMB"),
+FString("Input tag for right mouse button"));
+
+
+	GameplayTags.InputTag_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("InputTag.1"),
+FString("Input tag for 1 key"));
+
+	
+	GameplayTags.InputTag_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("InputTag.2"),
+FString("Input tag for 2 key"));
+	
+	
+	GameplayTags.InputTag_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("InputTag.3"),
+FString("Input tag for 3 key"));
+
+	
+	GameplayTags.InputTag_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("InputTag.4"),
+FString("Input tag for 4 key"));
+
+	/*
+	* End Input Tags
+	*/
 }
