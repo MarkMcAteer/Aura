@@ -27,9 +27,12 @@ void AAuraEffectActor::BeginPlay()
 void AAuraEffectActor::ApplyEffectToTarget(AActor* TargetActor, TSubclassOf<UGameplayEffect> GameplayEffectClass)
 {
 	UAbilitySystemComponent* TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(TargetActor);
-
+	if (TargetASC == nullptr)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("TargetASC is null for TargetActor: %s"), *GetNameSafe(TargetActor));
+		return;
+	}
 	FGameplayEffectContextHandle EffectContextHandle = TargetASC->MakeEffectContext();
-	if (TargetASC == nullptr) return;
 	
 	check(GameplayEffectClass);
 	EffectContextHandle.AddSourceObject(this);
