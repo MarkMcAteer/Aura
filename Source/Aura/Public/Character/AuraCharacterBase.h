@@ -66,6 +66,8 @@ protected:
 	
 private:
 
+	bool bGenerateOverlapEvents = true;
+
 	// Our array of abilities given to Aura on the start of the game.
 	UPROPERTY(EditDefaultsOnly, Category="Abilities")
 	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;

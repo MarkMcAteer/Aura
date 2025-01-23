@@ -27,14 +27,15 @@ void AAuraEffectActor::BeginPlay()
 void AAuraEffectActor::ApplyEffectToTarget(AActor* TargetActor, TSubclassOf<UGameplayEffect> GameplayEffectClass)
 {
 	UAbilitySystemComponent* TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(TargetActor);
+	
 	if (TargetASC == nullptr)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("TargetASC is null for TargetActor: %s"), *GetNameSafe(TargetActor));
+		//UE_LOG(LogTemp, Warning, TEXT("TargetASC is null for TargetActor: %s"), *GetNameSafe(TargetActor));
 		return;
 	}
-	FGameplayEffectContextHandle EffectContextHandle = TargetASC->MakeEffectContext();
-	
 	check(GameplayEffectClass);
+
+	FGameplayEffectContextHandle EffectContextHandle = TargetASC->MakeEffectContext();
 	EffectContextHandle.AddSourceObject(this);
 	const FGameplayEffectSpecHandle EffectSpecHandle = TargetASC->MakeOutgoingSpec(GameplayEffectClass, ActorLevel, EffectContextHandle);
 	// Asterisk will dereference the Data pointer
