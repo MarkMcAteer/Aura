@@ -60,13 +60,9 @@ protected:
 	void ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GameplayEffectClass, float Level) const;
 	void InitializeDefaultAttributes() const;
 
-protected:
-
 	void AddCharacterAbilities() const;
 	
 private:
-
-	bool bGenerateOverlapEvents = true;
 
 	// Our array of abilities given to Aura on the start of the game.
 	UPROPERTY(EditDefaultsOnly, Category="Abilities")
