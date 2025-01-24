@@ -35,5 +35,7 @@ public:
 	// This is because if we did only BlueprintCallable we could not override in different enemies. 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	UAnimMontage* GetHitReactMontage();
+
+	virtual void Die() = 0;
 	
 };
