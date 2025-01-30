@@ -10,7 +10,7 @@ void UAuraAbilitySystemComponent::AbilityActorInfoSet()
 {
 	OnGameplayEffectAppliedDelegateToSelf.AddUObject(this, &UAuraAbilitySystemComponent::ClientEffectApplied);
 
-	const FAuraGameplayTags& GameplayTags = FAuraGameplayTags::Get();
+	//const FAuraGameplayTags& GameplayTags = FAuraGameplayTags::Get();
 	
 }
 

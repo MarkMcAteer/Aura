@@ -6,7 +6,6 @@
 #include "AuraGameplayTags.h"
 #include "AbilitySystem/AuraAbilitySystemComponent.h"
 #include "EnhancedInputSubsystems.h"
-#include "MovieSceneTracksComponentTypes.h"
 #include "NavigationSystem.h"
 #include "NavigationPath.h"
 #include "Components/SplineComponent.h"
@@ -34,16 +33,16 @@ void AAuraPlayerController::PlayerTick(float DeltaTime)
 	AutoRun();
 }
 
-void AAuraPlayerController::ShowDamageNumber_Implementation(float DamageAmount, ACharacter* TargetCharacter)
+void AAuraPlayerController::ShowDamageNumber_Implementation(float DamageAmount, ACharacter* TargetCharacter, bool bBlockedHit, bool bCriticalHit)
 {
 	// Construct the widget component for the damage number
-	if (IsValid(TargetCharacter) && DamageTextComponentClass)
+	if (IsValid(TargetCharacter) && DamageTextComponentClass && IsLocalController())
 	{
 		UDamageTextComponent* DamageText = NewObject<UDamageTextComponent>(TargetCharacter, DamageTextComponentClass);
 		DamageText->RegisterComponent();
 		DamageText->AttachToComponent(TargetCharacter->GetRootComponent(), FAttachmentTransformRules::KeepRelativeTransform);
 		DamageText->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
-		DamageText->SetDamageText(DamageAmount);
+		DamageText->SetDamageText(DamageAmount, bBlockedHit, bCriticalHit);
 	}
 	
 }
@@ -71,6 +70,7 @@ void AAuraPlayerController::CursorTrace()
 	if (!CursorHit.bBlockingHit) return;
 
 	LastActor = ThisActor;
+	// ThisActor = Cast<IEnemyInterface>(CursorHit.GetActor());
 	ThisActor = CursorHit.GetActor();
 
 	if (LastActor != ThisActor)
@@ -79,7 +79,8 @@ void AAuraPlayerController::CursorTrace()
 		if (ThisActor) ThisActor->HighlightActor();
 	}
 	
-}
+} 
+
 
 void AAuraPlayerController::AbilityInputTagPressed(FGameplayTag InputTag)
 {
@@ -123,8 +124,8 @@ void AAuraPlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
 				bAutoRunning = true;
 			}	
 		}
-		bTargeting = false;
 		FollowTime = 0.f;
+		bTargeting = false;
 	}
 }
 
@@ -213,7 +214,7 @@ void AAuraPlayerController::SetupInputComponent()
 
 void AAuraPlayerController::Move(const FInputActionValue& InputActionValue)
 {
-	const FVector2d InputAxisVector = InputActionValue.Get<FVector2D>();
+	const FVector2D InputAxisVector = InputActionValue.Get<FVector2D>();
 	const FRotator Rotation = GetControlRotation();
 	const FRotator YawRotation(0.f, Rotation.Yaw, 0.0f);
 
@@ -222,6 +223,10 @@ void AAuraPlayerController::Move(const FInputActionValue& InputActionValue)
 
 	if (APawn* ControlledPawn = GetPawn<APawn>())
 	{
+		if (bAutoRunning)
+		{
+			bAutoRunning = false;
+		}
 		ControlledPawn->AddMovementInput(ForwardDirection, InputAxisVector.Y);
 		ControlledPawn->AddMovementInput(RightDirection, InputAxisVector.X);
 

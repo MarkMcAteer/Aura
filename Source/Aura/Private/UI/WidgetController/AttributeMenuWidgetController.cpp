@@ -19,7 +19,6 @@ void UAttributeMenuWidgetController::BindCallbacksToDependencies()
 		}
 		);
 	}
-
 }
 
 void UAttributeMenuWidgetController::BroadcastInitialValues()
@@ -30,7 +29,6 @@ void UAttributeMenuWidgetController::BroadcastInitialValues()
 	{
 		BroadcastAttributeInfo(Pair.Key, Pair.Value());
 	}
-	
 }
 
 void UAttributeMenuWidgetController::BroadcastAttributeInfo(const FGameplayTag& AttributeTag,
