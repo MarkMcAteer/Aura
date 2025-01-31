@@ -25,4 +25,12 @@ public:
 	// "= 0" makes it a pure virtual function so it will be dervied from and does not need to be defined within cpp
 	virtual void HighlightActor() = 0;
 	virtual void UnHighlightActor() = 0;
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void SetCombatTarget(AActor* InCombatTarget);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	AActor* GetCombatTarget() const;
+
+	
 };
