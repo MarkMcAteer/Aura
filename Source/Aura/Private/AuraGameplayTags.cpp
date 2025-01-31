@@ -23,7 +23,6 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 	GameplayTags.Attributes_Primary_Vigor = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Attributes.Primary.Vigor"),
  FString("Increases health"));
 
-	/* End Primary Gameplay Attribute Tags */
 	
 	/* Secondary Gameplay Attribute Tags */
 	
@@ -57,7 +56,6 @@ FString("Ignores Percentage of enemy Armor, increase Critical Hit Chance"));
 	GameplayTags.Attributes_Secondary_MaxMana = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Attributes.Secondary.MaxMana"),
  FString("Maximum amount of Mana obtainable"));
 
-	/* End Secondary Gameplay Attribute Tags */
 	
 	/* Input Tags */
 
@@ -84,7 +82,6 @@ FString("Input tag for 3 key"));
 	GameplayTags.InputTag_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("InputTag.4"),
 FString("Input tag for 4 key"));
 
-	/* End Input Tags */
 
 	/* Damage Tags */
 	
@@ -103,7 +100,6 @@ FString("Arcane Damage Type"));
 	GameplayTags.Damage_Physical = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Damage.Physical"),
 FString("Physical Damage Type"));
 	
-	/* End Damage Tags */
 
 	/* Resistance Tags */
 
@@ -119,7 +115,6 @@ FString("Resistance to Arcane Damage"));
 	GameplayTags.Attributes_Resistance_Physical = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Attributes.Resistance.Physical"),
 FString("Resistance to Physical Damage"));
 
-	/* End Resistance Tags */
 
 	/* Map of Damage Types to Resistances */
 
@@ -128,12 +123,16 @@ FString("Resistance to Physical Damage"));
 	GameplayTags.DamageTypesToResistances.Add(GameplayTags.Damage_Arcane, GameplayTags.Attributes_Resistance_Arcane);
 	GameplayTags.DamageTypesToResistances.Add(GameplayTags.Damage_Physical, GameplayTags.Attributes_Resistance_Physical);
 	
-	/* End Map of Damage Types to Resistances */
 
 	/* Effects */
 
 	GameplayTags.Effects_HitReact = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Effects.HitReact"),
 FString("Tag granted when Hit Reacting."));
 
-	/* End Effects */
+
+	/* Abilities */
+
+	GameplayTags.Abilities_Attack = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Abilities.Attack"),
+FString("Attack Ability Tag"));
+	
 }
