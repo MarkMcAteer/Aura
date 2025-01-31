@@ -54,6 +54,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Applied Effects")
 	bool bDestroyOnEffectRemoval = false;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Applied Effects")
+	bool bApplyEffectToEnemies = false;
+	
 	// Instant Effect
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Applied Effects");
 	TSubclassOf<UGameplayEffect> InstantGameplayEffectClass;
