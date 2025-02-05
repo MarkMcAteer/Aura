@@ -4,9 +4,22 @@
 
 #include "CoreMinimal.h"
 #include "UObject/Interface.h"
+#include "GameplayTagContainer.h"
 #include "CombatInterface.generated.h"
 
 class UAnimMontage;
+
+USTRUCT(BlueprintType)
+struct FTaggedMontage
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	UAnimMontage* Montage = nullptr;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	FGameplayTag MontageTag;
+};
 
 // This class does not need to be modified.
 UINTERFACE(MinimalAPI, BlueprintType)
@@ -26,16 +39,27 @@ class AURA_API ICombatInterface
 public:
 	
 	virtual int32 GetPlayerLevel();
-	virtual FVector GetCombatSocketLocation();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	FVector GetCombatSocketLocation(const FGameplayTag& MontageTag);
 
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void UpdateFacingTarget(const FVector& Target);
 
-	// Automatically gernerate a virtual native version that we can override in c++
+	// Automatically generate a virtual native version that we can override in c++
 	// This is because if we did only BlueprintCallable we could not override in different enemies. 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	UAnimMontage* GetHitReactMontage();
 
 	virtual void Die() = 0;
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	bool IsDead() const;
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	AActor* GetAvatar();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	TArray<FTaggedMontage> GetAttackMontages();
 	
 };

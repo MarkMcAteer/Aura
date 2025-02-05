@@ -27,13 +27,21 @@ public:
 	// Return the pointers to ability system component and the attribute set. 
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	UAttributeSet* GetAttributeSet() const {  return AttributeSet; }
-
-	virtual UAnimMontage* GetHitReactMontage_Implementation() override;
-
-	virtual void Die() override;
-
+	
 	UFUNCTION(NetMulticast, Unreliable)
 	virtual void MulticastHandleDeath();
+	
+	/* Combat Interface */
+	virtual FVector GetCombatSocketLocation_Implementation(const FGameplayTag& MontageTag) override;
+	virtual bool IsDead_Implementation() const override;
+	virtual AActor* GetAvatar_Implementation() override;
+	virtual void Die() override;
+	virtual UAnimMontage* GetHitReactMontage_Implementation() override;
+	virtual TArray<FTaggedMontage> GetAttackMontages_Implementation() override;
+	/* End Combat Interface */
+
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	TArray<FTaggedMontage> AttackMontages;
 	
 protected:
 	// Called when the game starts or when spawned
@@ -44,15 +52,21 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category="Combat")
 	FName WeaponTipSocketName;
+	
+	UPROPERTY(EditAnywhere, Category="Combat")
+	FName LeftHandSocketName;
 
-	virtual FVector GetCombatSocketLocation() override;
-
+	UPROPERTY(EditAnywhere, Category="Combat")
+	FName RightHandSocketName;
+	
 	// Pointers to store ASC and AS
 	UPROPERTY()
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
 
 	UPROPERTY()
 	TObjectPtr<UAttributeSet> AttributeSet;
+
+	bool bDead = false;
 
 	virtual void InitAbilityActorInfo();
 
