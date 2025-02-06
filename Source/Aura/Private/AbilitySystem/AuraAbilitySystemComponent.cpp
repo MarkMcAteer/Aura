@@ -42,6 +42,10 @@ void UAuraAbilitySystemComponent::AbilityInputTagHeld(const FGameplayTag& InputT
 		if (AbilitySpec.DynamicAbilityTags.HasTagExact(InputTag))
 		{
 			AbilitySpecInputPressed(AbilitySpec);
+			if (!AbilitySpec.IsActive())
+			{
+				TryActivateAbility(AbilitySpec.Handle);
+			}
 		}
 	}
 }
@@ -58,16 +62,12 @@ void UAuraAbilitySystemComponent::AbilityInputTagReleased(const FGameplayTag& In
 		if (AbilitySpec.DynamicAbilityTags.HasTagExact(InputTag))
 		{
 			AbilitySpecInputReleased(AbilitySpec);
-			if (!AbilitySpec.IsActive())
-			{
-				TryActivateAbility(AbilitySpec.Handle);
-			}
 		}
 	}
 }
 
 void UAuraAbilitySystemComponent::ClientEffectApplied_Implementation(UAbilitySystemComponent* AbilitySystemComponent,
-                                                const FGameplayEffectSpec& EffectSpec, FActiveGameplayEffectHandle ActiveEffectHandle) const
+                                                const FGameplayEffectSpec& EffectSpec, FActiveGameplayEffectHandle ActiveEffectHandle)
 {
 	// GEngine->AddOnScreenDebugMessage(1, 8.f, FColor::Blue, FString("Effect Applied!"));
 	FGameplayTagContainer TagContainer;
