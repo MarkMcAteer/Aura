@@ -39,6 +39,8 @@
 -Wno-unused-but-set-parameter
 -Wno-ordered-compare-function-pointers
 -Wno-bitwise-instead-of-logical
+-Wno-deprecated-copy
+-Wno-deprecated-copy-with-user-provided-copy
 -Wno-gnu-string-literal-operator-template
 -Wno-inconsistent-missing-override
 -Wno-invalid-offsetof
@@ -62,6 +64,9 @@
 -Wno-unknown-warning-option
 -Wno-range-loop-analysis
 -Wno-single-bit-bitfield-constant-conversion
+-Wno-shadow
+-Wno-invalid-unevaluated-string
+-Wno-deprecated-this-capture
 -ffp-contract=off
 -fno-delete-null-pointer-checks
 -O0
