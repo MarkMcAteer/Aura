@@ -24,15 +24,18 @@ TArray<FVector> UAuraSummonAbility::GetSpawnLocations()
 			ChosenSpawnLocation + FVector(0.f, 0.f, 400.f), 
 			ChosenSpawnLocation - FVector(0.f, 0.f, 400.f),
 			ECC_Visibility);
-
+		
 		if (Hit.bBlockingHit)
 		{
 			ChosenSpawnLocation = Hit.ImpactPoint; 
 		}
-		
-		SpawnLocations.Add(ChosenSpawnLocation);
-		
+		SpawnLocations.Add(ChosenSpawnLocation); 
 	}
-	
 	return SpawnLocations;
+}
+
+TSubclassOf<APawn> UAuraSummonAbility::GetRandomMinionClass()
+{
+	const int32 Selection = FMath::RandRange(0, MinionClasses.Num() - 1);
+	return MinionClasses[Selection];
 }

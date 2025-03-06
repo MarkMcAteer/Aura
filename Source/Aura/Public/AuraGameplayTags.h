@@ -77,6 +77,7 @@ public:
 	FGameplayTag Effects_HitReact;
 
 	FGameplayTag Abilities_Attack;
+	FGameplayTag Abilities_Summon;
 
 	FGameplayTag Combat_Socket_Weapon;
 	FGameplayTag Combat_Socket_LeftHand;

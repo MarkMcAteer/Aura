@@ -19,6 +19,9 @@ public:
 	// Function for knowing where to spawn minions.
 	UFUNCTION(BlueprintCallable)
 	TArray<FVector> GetSpawnLocations();
+	
+	UFUNCTION(BlueprintPure, Category="Summoning")
+	TSubclassOf<APawn> GetRandomMinionClass();
 
 	UPROPERTY(EditDefaultsOnly, Category="Summoning")
 	int32 NumMinions = 5; 
@@ -35,4 +38,5 @@ public:
 	// Span to spawn minions. Like the air sweeper in Clash of Clans. 
 	UPROPERTY(EditDefaultsOnly, Category="Summoning")
 	float SpawnSpread = 90.f;
+	
 };
